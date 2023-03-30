@@ -1,3 +1,4 @@
+import uz.muu.Kitchen;
 import uz.muu.MealRecipes;
 import uz.muu.RestaurantKitchen;
 
@@ -12,12 +13,11 @@ public class Main {
         restaurantKitchen.addMeal(2, "Lagman", 15000);
         restaurantKitchen.addMeal(3, "Qozonkabob", 35000);
 
-        restaurantKitchen.refillProduct("Meat", 30000);
-        restaurantKitchen.refillProduct("Oil", 10000);
-        restaurantKitchen.refillProduct("Potatoes", 50000);
-        restaurantKitchen.refillProduct("Onion", 20000);
-        restaurantKitchen.refillProduct("Rice", 25000);
-
+        restaurantKitchen.refillProduct("Meat", 30000,true);
+        restaurantKitchen.refillProduct("Oil", 10000,true);
+        restaurantKitchen.refillProduct("Potatoes", 50000,true);
+        restaurantKitchen.refillProduct("Onion", 20000,true);
+        restaurantKitchen.refillProduct("Rice", 25000,true);
 
 
         System.out.println(restaurantKitchen.getPrice(1));
@@ -31,6 +31,8 @@ public class Main {
         restaurantKitchen.addRecipe(2, "Oil", 500);
         restaurantKitchen.addRecipe(2, "Onion", 600);
 
+        restaurantKitchen.addRecipe(3,"Oil",11000);
+
         boolean mealAvailable = restaurantKitchen.availableMeal(1);
 
         restaurantKitchen.sell(1);
@@ -40,8 +42,8 @@ public class Main {
 
         System.out.println(restaurantKitchen.availableProduct("Oil"));
 
-        List<MealRecipes> sortedSoldMealRecipes = restaurantKitchen.preparedMeal();
-        for (MealRecipes mr :
+        List<Kitchen> sortedSoldMealRecipes = restaurantKitchen.preparedMeal();
+        for (Kitchen mr :
                 sortedSoldMealRecipes) {
             System.out.println(mr);
         }

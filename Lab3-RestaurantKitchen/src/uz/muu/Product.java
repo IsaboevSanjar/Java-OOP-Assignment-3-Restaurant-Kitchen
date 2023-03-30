@@ -1,22 +1,12 @@
 package uz.muu;
 
-public class MealRecipes {
-    int mealID;
+public class Product {
     String productName;
     double amount;
 
-    public MealRecipes(int mealID, String productName, double amount) {
-        this.mealID = mealID;
+    public Product(String productName, double amount) {
         this.productName = productName;
         this.amount = amount;
-    }
-
-    public int getMealID() {
-        return mealID;
-    }
-
-    public void setMealID(int mealID) {
-        this.mealID = mealID;
     }
 
     public String getProductName() {
@@ -37,9 +27,8 @@ public class MealRecipes {
 
     @Override
     public String toString() {
-        return "MealRecipes{" +
-                "mealID=" + mealID +
-                ", productName='" + productName + '\'' +
+        return "Product{" +
+                "productName='" + productName + '\'' +
                 ", amount=" + amount +
                 '}';
     }
