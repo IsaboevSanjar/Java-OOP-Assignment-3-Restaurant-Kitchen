@@ -8,6 +8,7 @@ public class RestaurantKitchen {
     List<Kitchen> mealList = new LinkedList<>();
     List<Product> productList = new LinkedList<>();
     List<MealRecipes> recipesList = new LinkedList<>();
+    List<Kitchen> preparedMeals = new LinkedList<>();
 
     public void addMeal(int id, String name, double price) {
         boolean mealExist = false;
@@ -112,7 +113,7 @@ public class RestaurantKitchen {
         return -1;
     }
 
-    public List<Kitchen> preparedMeal() {
-        return mealList;
+    public List<MealRecipes> preparedMeal() {
+        return recipesList;
     }
 }

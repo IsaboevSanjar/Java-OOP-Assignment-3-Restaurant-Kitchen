@@ -42,8 +42,8 @@ public class Main {
 
         System.out.println(restaurantKitchen.availableProduct("Oil"));
 
-        List<Kitchen> sortedSoldMealRecipes = restaurantKitchen.preparedMeal();
-        for (Kitchen mr :
+        List<MealRecipes> sortedSoldMealRecipes = restaurantKitchen.preparedMeal();
+        for (MealRecipes mr :
                 sortedSoldMealRecipes) {
             System.out.println(mr);
         }
