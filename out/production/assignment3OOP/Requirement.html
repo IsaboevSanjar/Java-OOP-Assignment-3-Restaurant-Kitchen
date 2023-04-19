@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>OOP Lab3</title>
+</head>
+<body>
+<h1 style="text-align: center;">Restaurant Kitchen<br> </h1>
+Implement a system to manage a kitchen of a restaurant
+(using <span style="font-weight: bold;">Java Collections</span>). The
+system must meet the following
+requirements.
+<h2>R1: Kitchen</h2>
+The different meals could be prepared in kitchen. Each
+meal is characterized by its unique <span
+        style="font-style: italic;">ID</span>, <span
+ style="font-style: italic;">name</span> selling <span
+ style="font-style: italic;">price</span> For instance:<br>
+<br>
+<table style="text-align: left;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+        <td style="vertical-align: top; font-weight: bold;">Meal<br>
+            ID<br>
+        </td>
+      <td style="vertical-align: top; font-weight: bold;">Meal<br>
+name<br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Selling<br>
+price</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top;">1<br>
+        </td>
+      <td style="vertical-align: top;">Plov<br>
+      </td>
+      <td style="vertical-align: top;">20000<br>
+      </td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top;">2<br>
+        </td>
+        <td style="vertical-align: top;">Lagman<br>
+        </td>
+        <td style="vertical-align: top;">15000<br>
+        </td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top;">3<br>
+        </td>
+        <td style="vertical-align: top;">Qozonkabob<br>
+        </td>
+        <td style="vertical-align: top;">35000<br>
+        </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Method <span style="font-weight: bold;">addMeal()</span> of class <span
+ style="font-weight: bold;">RestaurantKitchen</span> let the administrator
+to add the description of a new meal. To obtain the price of a
+meal, the method <span style="font-weight: bold;">getPrice()</span>
+is provided. If a price is requested for a meal id that does not
+exist, the method returns an error code (e.g., -1.0).<span
+ style="font-weight: bold;"></span><br>
+<h2>R2: Products and refill<br>
+</h2>
+The meals of a kitchen are produced by means of product. Each product is
+characterized by a unique <span style="font-style: italic;">name</span>
+ and the available <span style="font-style: italic;">amount.</span>
+For instance:<br>
+<br>
+<table border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Product name<br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Amount<br>
+      </td>
+    </tr>
+    <tr>
+      <td>Meat</td>
+      <td>30000</td>
+    </tr>
+    <tr>
+      <td>Oil</td>
+      <td>10000</td>
+    </tr>
+    <tr>
+      <td>Potatoes</td>
+      <td>50000</td>
+    </tr>
+    <tr>
+        <td>Onion</td>
+        <td>20000</td>
+    </tr>
+    <tr>
+        <td>Rice</td>
+        <td>25000</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Products are recharged through the method <span style="font-weight: bold;">refillProduct()</span>
+of class <span style="font-weight: bold;">RestaurantKitchen.</span> If a
+non-existing name is provided a new product is created, otherwise the
+existing product is recharged. Further, it is possible to query the
+available amount of a given product
+with method <span style="font-weight: bold;">availableProduct()</span>. If a
+non-existing product name is queried, the
+method returns an error code (e.g., -1.0).<br>
+
+<h2>R3: Recipes</h2>
+The meal consist of products for preparing. Meal recipe is generated based on table below and each recipe is
+characterized by a unique meal <span style="font-style: italic;">ID</span>,
+product  <span style="font-style: italic;">name</span> and product <span style="font-style: italic;">amount</span>
+For instance:<br>
+<br>
+<table border="1" cellpadding="2" cellspacing="2">
+    <tbody>
+    <tr>
+        <td style="vertical-align: top; font-weight: bold;">Meal ID<br>
+        </td>
+        <td style="vertical-align: top; font-weight: bold;">Product name<br>
+        </td>
+        <td style="vertical-align: top; font-weight: bold;">Amount<br>
+        </td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Meat</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Oil</td>
+        <td>400</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Onion</td>
+        <td>500</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Rice</td>
+        <td>1000</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Meat</td>
+        <td>1200</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Oil</td>
+        <td>500</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Onion</td>
+        <td>600</td>
+    </tr>
+
+
+
+    </tbody>
+</table>
+<br>
+
+
+
+
+
+
+Administrator can add recipe information based on meal ID, product name to be used and product amount.
+To this aim method <span style="font-weight: bold;">addRecipe()</span> is provided.
+
+<br>
+Given the name of a meal (e.g., "Plov") it is possible to obtain
+the total number of available products to prepare current meal by means of
+method <span style="font-weight: bold;">availableMeal().</span> The
+method counts all products to prepare meal and return boolean value with result.<br>
+<h2>R4: Selling</h2>
+The restaurant kitchen sells a product by specifying the meal ID in method <span style="font-weight: bold;">sell()</span>.
+The method returns the boolean value id meal were able to be prepared and sold. If code
+is invalid (meal id), the meal ran out, an error code
+is returned (e.g., -1). On normal behavior, the kitchen decrements the
+quantity of available meal products. <span style="font-weight: bold;"><br>
+    Also implement method <span style="font-weight: bold;">preparedMeal()</span> which returns List of all meals which was
+    prepared in Descending order by number of preparation by mean of meal name and number of preparations
+</span>
+<hr style="width: 100%; height: 2px;"><br>
+<br>
+</body>
+</html>

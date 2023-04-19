@@ -1,14 +1,21 @@
 package uz.muu;
 
 import javax.sound.midi.Track;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class RestaurantKitchen {
     List<Kitchen> mealList = new LinkedList<>();
     List<Product> productList = new LinkedList<>();
     List<MealRecipes> recipesList = new LinkedList<>();
-    List<Kitchen> preparedMeals = new LinkedList<>();
+    List<Waiters> waitersList = new LinkedList<>();
+
+    List<Prepared> sold = new LinkedList<>();
+
+    List<WaiterSalary> waiterSalaryList = new LinkedList<>();
+
+
+    int totalMealSold=0;
+    int totalRestaurantProfit=0;
 
     public void addMeal(int id, String name, double price) {
         boolean mealExist = false;
@@ -36,7 +43,7 @@ public class RestaurantKitchen {
         recipesList.add(new MealRecipes(mealId, productName, amount));
     }
 
-    public void sell(int mealId) {
+    public void sell(int mealId, String waiter_name) {
         boolean invalidId = true;
         boolean availableMeal = true;
         for (MealRecipes recipes : recipesList) {
@@ -61,7 +68,43 @@ public class RestaurantKitchen {
         }
         if (!availableMeal) {
             System.out.println("Not available meal " + mealId);
-        } else System.out.println(mealId + " sold");
+        } else {
+            System.out.println(mealId + " sold");
+            int counter = 0;
+            for (Kitchen recipes : mealList) {
+
+                if (mealId == recipes.mealID) {
+                    if (counter == 0) {
+                        boolean waiter_exist = false;
+                        for (WaiterSalary waiter : waiterSalaryList) {
+                            if (waiter.getName_surname().equals(waiter_name)) {
+                                waiter_exist = true;
+                                double salary = (waiter.getSalary() + recipes.getSellingPrice() * 0.1);
+                                waiter.setSalary((int) salary);
+                                totalMealSold=(int) (totalMealSold+recipes.getSellingPrice());
+                                totalRestaurantProfit=(int) (totalRestaurantProfit+(recipes.getSellingPrice()-recipes.getSellingPrice()*0.1));
+                                counter += 1;
+                                break;
+                            }
+                        }
+                        if (!waiter_exist) {
+                            System.out.println(waiter_name + " does not exist.");
+                        }
+                    }
+                    boolean isPrepared = false;
+                    for (Prepared prepared : sold) {
+                        if (prepared.name.equals(recipes.mealName)) {
+                            isPrepared = true;
+                            prepared.setCount(prepared.getCount() + 1);
+                            break;
+                        }
+                    }
+                    if (!isPrepared) {
+                        sold.add(new Prepared(recipes.mealName, 1));
+                    }
+                }
+            }
+        }
     }
 
     public void refillProduct(String productName, double amount, boolean refill) {
@@ -113,7 +156,54 @@ public class RestaurantKitchen {
         return -1;
     }
 
-    public List<MealRecipes> preparedMeal() {
-        return recipesList;
+    public List<Prepared> preparedMeal() {
+        sorted(sold);
+        return sold;
+    }
+
+    public List<WaiterSalary> waitersSalary() {
+        sorted_waiters(waiterSalaryList);
+        return waiterSalaryList;
+    }
+
+    private void sorted(List<Prepared> sold) {
+        sold.sort(new Comparator<Prepared>() {
+            @Override
+            public int compare(Prepared o1, Prepared o2) {
+
+                return Integer.compare(o2.getCount(), o1.getCount());
+            }
+        });
+    }
+
+    private void sorted_waiters(List<WaiterSalary> salaries) {
+        salaries.sort(new Comparator<WaiterSalary>() {
+            @Override
+            public int compare(WaiterSalary o1, WaiterSalary o2) {
+
+                return Integer.compare(o1.getSalary(), o2.getSalary());
+            }
+        });
+    }
+
+
+    public void addWaiters(int id, String name_surname) {
+        boolean isExist = false;
+        for (Waiters waiters : waitersList) {
+            if (waiters.ID == id) {
+                System.out.println(name_surname + " is existed waiter");
+                isExist = true;
+            }
+        }
+        if (!isExist) {
+            waitersList.add(new Waiters(id, name_surname));
+            waiterSalaryList.add(new WaiterSalary(name_surname, 0));
+        }
+    }
+    public void totalMealSoldCost(){
+        System.out.println("Total meal sold: "+totalMealSold);
+    }
+    public void totalRestaurantProfit(){
+        System.out.println("Total restaurant profit: "+totalRestaurantProfit);
     }
 }
